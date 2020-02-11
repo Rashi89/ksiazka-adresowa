@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1581361558 source:d:\programowanie\nowy folder\logowanie-rejestracja\main.cpp
+	<iostream>
+	<windows.h>
+	<fstream>
+	<vector>
+	<string>
+	<algorithm>
+
