@@ -366,7 +366,7 @@ int DodanieUzytkownika(std:: vector <Uzytkownik> &uzytkownicy,int iloscUzytkowni
         cout<<endl;
 
         KsiazkaUzytkownikow.close();
-        cout<<"Przyjaciel dodany!"<<endl;
+        cout<<"Uzytkownik dodany!"<<endl;
         Sleep(1000);
     } else {
         cout<<"Nie ma pliku: Ksiazka_Adresowa.txt"<<endl;
@@ -479,7 +479,6 @@ void zapis(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
 
             ksiazka.close();
                     }
-            Sleep(1000);
             break;
             }
             else break;
@@ -500,7 +499,7 @@ void zapis(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
     }
     ksiazkaAdresowa.close();
 
-    getchar();
+    //getchar();
 }
 
 void ZamianaPlikow()
@@ -535,20 +534,6 @@ void ZamianaPlikow()
         }
 }
 
-bool reset( fstream & ksiazka ) //resetuj konfiguracje sciezek
-{
-    if( ksiazka.is_open() )
-         ksiazka.close();
-
-    ksiazka.open( "Adresaci.txt", ios::out | ios::trunc );
-    ksiazka.clear();
-    if( !ksiazka ) return false;
-
-    ksiazka.flush();
-
-    return true;
-}
-
 void usuwanieOsobyZeStruktury(std::vector<Adresat> &adresaci, int id) {
     int pozycja=0;
     for(int i=0; i<adresaci.size(); i++) {
@@ -564,6 +549,41 @@ void edycjaImienia(std::vector <Adresat> &adresaci,int id, int idUzytkownika, st
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
             adresaci[i].imie=noweImie;
+        }
+    }
+    Sleep(1000);
+}
+void edycjaNazwiska(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string noweNazwisko) {
+    for(int i=0; i<adresaci.size(); i++) {
+        if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
+            adresaci[i].nazwisko=noweNazwisko;
+        }
+    }
+    Sleep(1000);
+}
+
+void edycjaAdresu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyAdres) {
+    for(int i=0; i<adresaci.size(); i++) {
+        if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
+            adresaci[i].adres=nowyAdres;
+        }
+    }
+    Sleep(1000);
+}
+
+void edycjaAdresuEmail(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyAdresEmail) {
+    for(int i=0; i<adresaci.size(); i++) {
+        if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
+            adresaci[i].adresEmail=nowyAdresEmail;
+        }
+    }
+    Sleep(1000);
+}
+
+void edycjaTelefonu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyTelefon) {
+    for(int i=0; i<adresaci.size(); i++) {
+        if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
+            adresaci[i].numerTelefonu=nowyTelefon;
         }
     }
     Sleep(1000);
@@ -671,8 +691,6 @@ void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownik
         nr_linii++;
     }
     ksiazkaAdresowa.close();
-
-    getchar();
 }
 
 int sprawdzPozycje(std::vector <Adresat> &adresaci, int idAdresata, int idUzytkownika)
@@ -688,6 +706,15 @@ int sprawdzPozycje(std::vector <Adresat> &adresaci, int idAdresata, int idUzytko
     return pozycja;
 }
 
+void EdycjaIZamianaPlikow(std::vector <Adresat> &adresaci,int id, int idUzytkownika)
+{
+                    zapisEdycji(adresaci,id,idUzytkownika);
+                    ZamianaPlikow();
+                    //fstream f_conf( "Adresaci.txt", ios::in ); //resetowanie pliku o danej nazwie
+                    //reset(f_conf);
+                    std::remove("Adresaci.txt");
+                    cout<<"Zmiany zapisane!"<<endl;
+}
 
 int main() {
 
@@ -729,25 +756,24 @@ int main() {
                     } else {
                         ID=WyszukanieOstatniegoID(adresaci);
                         idWprowadzanegoPrzyjaciela=ID;
-                    }*/
-                        cout<<"wielkosc "<<adresaci.size()<<endl;
+                    }
+                cout<<"wielkosc "<<adresaci.size()<<endl;*/
                 while(idUzytkownika!=0){
                 cout<<"1. Dodaj adresata "<<endl;
                 cout<<"2. Wyszukaj po imieniu "<<endl;
                 cout<<"3. Wyszukaj po nazwisku "<<endl;
                 cout<<"4. Wyswietl wszystkich adresatow "<<endl;
                 cout<<"5. Usun adresata "<<endl;
-                cout<<"6. Edycja imienia "<<endl;
+                cout<<"6. Edycja danych adresata "<<endl;
                 cout<<"9. Wyloguj sie "<<endl;
                 cin>>wybor;
-                cout<<"ID uzytkownika: "<<idUzytkownika<<endl;
-                cout<<"ile osob: "<<adresaci.size()<<endl;
-
+                //cout<<"ID uzytkownika: "<<idUzytkownika<<endl;
+                //cout<<"ile osob: "<<adresaci.size()<<endl;
                 if(wybor=='1'){
                 int naj=NajwiekszeIDAdresata();
-                cout<<naj<<endl;
+                //cout<<naj<<endl;
                 iloscPrzyjaciol=DodanieOsobyDoKsiazkiAdresowej(adresaci,iloscPrzyjaciol,idUzytkownika, naj);
-                cout<<"Ilosc przyjaciol uzytkownika "<<adresaci.size()<<endl;
+                //cout<<"Ilosc przyjaciol uzytkownika "<<adresaci.size()<<endl;
                 }
                 else if(wybor=='2')
                 {
@@ -778,8 +804,7 @@ int main() {
                     if(czyIstniejeTakieID(adresaci,id)==1){
                     zapis(adresaci,id,idUzytkownika);
                     ZamianaPlikow();
-                    fstream f_conf( "Adresaci.txt", ios::in ); //resetowanie pliku o danej nazwie
-                    reset(f_conf);
+                    std::remove("Adresaci.txt");
                     usuwanieOsobyZeStruktury(adresaci,id);
                     cout<<"Uzytkownik usuniety! "<<endl;
                     }
@@ -793,13 +818,48 @@ int main() {
                     cin>>id;
                     if(czyIstniejeTakieID(adresaci,id)==1){
                     sprawdzPozycje(adresaci,id,idUzytkownika);
+                    cout<<"1. Imie "<<endl;
+                    cout<<"2. Nazwisko "<<endl;
+                    cout<<"3. Adres "<<endl;
+                    cout<<"4. Adres email "<<endl;
+                    cout<<"5. Numer telefonu "<<endl;
+                    cin>> wybor;
+                    if(wybor=='1'){
                     cout<<"Podaj nowe imie: "<<endl;
                     cin>>imie;
                     edycjaImienia(adresaci,id,idUzytkownika,imie);
-                    zapisEdycji(adresaci,id,idUzytkownika);
-                    ZamianaPlikow();
-                    fstream f_conf( "Adresaci.txt", ios::in ); //resetowanie pliku o danej nazwie
-                    reset(f_conf);
+                    EdycjaIZamianaPlikow(adresaci,id,idUzytkownika);
+                    }
+                    else if(wybor=='2'){
+                            cout<<"Podaj nowe nazwisko: "<<endl;
+                            cin>>nazwisko;
+                            edycjaNazwiska(adresaci,id,idUzytkownika,nazwisko);
+                            EdycjaIZamianaPlikow(adresaci,id,idUzytkownika);
+                    }
+                    else if(wybor=='3'){
+                        cout<< "Podaj nowy adres: ";
+                        cin.sync();
+                        getline(cin, adres);
+                        edycjaAdresu(adresaci,id,idUzytkownika,adres);
+                        EdycjaIZamianaPlikow(adresaci,id,idUzytkownika);
+
+                    }
+                    else if(wybor=='4')
+                    {
+                        cout<<"Podaj nowy adres email: ";
+                        cin>>email;
+                        edycjaAdresuEmail(adresaci,id,idUzytkownika,email);
+                        EdycjaIZamianaPlikow(adresaci,id,idUzytkownika);
+
+                    }
+                    else if(wybor=='5')
+                    {
+                        cout<< "Podaj nowy nr telefonu: ";
+                        cin.sync();
+                        getline(cin, numerTelefonu);
+                        edycjaTelefonu(adresaci,id,idUzytkownika,numerTelefonu);
+                        EdycjaIZamianaPlikow(adresaci,id,idUzytkownika);
+                    }
                     }
                     else cout<<"nie ma takiego id!"<<endl;
 
@@ -808,9 +868,7 @@ int main() {
                 {
                     idUzytkownika=0;
                 }
-
                 }
-
             }
         }
         else if(wybor=='3')
