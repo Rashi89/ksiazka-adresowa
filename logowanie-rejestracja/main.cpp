@@ -164,7 +164,7 @@ int main()
         if(wybor=='2')
         {
             idWprowadzanegoUzytkownika=DodanieUzytkownika(uzytkownicy,idWprowadzanegoUzytkownika);
-            cout<<idWprowadzanegoUzytkownika<<endl;
+            //cout<<idWprowadzanegoUzytkownika<<endl;
             Sleep(1000);
         }
         else if(wybor=='1')
@@ -174,7 +174,7 @@ int main()
             cout<<"Podaj haslo: ";
             cin >>haslo;
             idUzytkownika=SprawdzanieLogowania(uzytkownicy,login, haslo);
-            cout<<idUzytkownika<<endl;
+            //cout<<idUzytkownika<<endl;
             Sleep(1000);
         }
 

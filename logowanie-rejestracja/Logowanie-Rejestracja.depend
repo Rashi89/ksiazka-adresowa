@@ -7,3 +7,11 @@
 	<string>
 	<algorithm>
 
+1581420460 source:d:\programowanie\projekty git\ksiazka-adresowa\logowanie-rejestracja\main.cpp
+	<iostream>
+	<windows.h>
+	<fstream>
+	<vector>
+	<string>
+	<algorithm>
+
