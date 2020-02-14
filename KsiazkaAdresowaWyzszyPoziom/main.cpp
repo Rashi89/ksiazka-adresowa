@@ -549,6 +549,18 @@ bool reset( fstream & ksiazka ) //resetuj konfiguracje sciezek
     return true;
 }
 
+void usuwanieOsobyZeStruktury(std::vector<Adresat> &adresaci, int id) {
+    int pozycja=0;
+    for(int i=0; i<adresaci.size(); i++) {
+        if(adresaci[i].id==id) {
+            pozycja=i;
+            break;
+        }
+    }
+    adresaci.erase(adresaci.begin()+pozycja);
+}
+
+
 
 
 int main() {
@@ -637,10 +649,9 @@ int main() {
                     ZamianaPlikow();
                     fstream f_conf( "Adresaci.txt", ios::in ); //resetowanie pliku o danej nazwie
                     reset(f_conf);
+                    usuwanieOsobyZeStruktury(adresaci,id);
                     }
                     else cout<<"nie ma takiego id!"<<endl;
-
-
                 }
                 else if(wybor=='9')
                 {
@@ -655,7 +666,6 @@ int main() {
         {
             exit(0);
         }
-
     }
     return 0;
 }
