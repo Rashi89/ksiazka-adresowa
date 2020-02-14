@@ -1,4 +1,6 @@
 1|1|a|a|a|a|a|
-2|2|b|b|b|b|b|
-5|1|e|e|e|e|e|
-6|2|b|b|b|b|b|
+3|1|c|c|c|c|c|
+5|1|b|b|b|b|b|
+7|1|r|r|r|r|r|
+6|2|B|b|b|b|b|
+8|2|b|b|b|b|b|

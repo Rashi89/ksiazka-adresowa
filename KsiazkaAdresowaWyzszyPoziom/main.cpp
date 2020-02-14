@@ -224,7 +224,7 @@ int WyszukanieOstatniegoID(std::vector<Adresat> &adresaci) {
     return identyfikator;
 }
 
-bool czyIstniejeTakieID(std::vector<Adresat> &adresaci,int id) {
+bool czyIstniejeTakieID(std::vector <Adresat> &adresaci,int id) {
     int pozycja=0;
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id) {
@@ -560,7 +560,133 @@ void usuwanieOsobyZeStruktury(std::vector<Adresat> &adresaci, int id) {
     adresaci.erase(adresaci.begin()+pozycja);
 }
 
+void edycjaImienia(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string noweImie) {
+    for(int i=0; i<adresaci.size(); i++) {
+        if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
+            adresaci[i].imie=noweImie;
+        }
+    }
+    Sleep(1000);
+}
 
+void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
+
+    int idWprowadzanegoPrzyjaciela=0;
+    string identyfikator,identyfikatorUzytkownika;
+    int id,ident;
+    string imie;
+    string nazwisko;
+    string adres;
+    string adresEmail;
+    string numerTelefonu;
+    int dlugoscLinii=0;
+    int iloscZnakow=0;
+    int p=0;
+    int k=0;
+
+    fstream ksiazkaAdresowa;
+    ksiazkaAdresowa.open("Ksiazka_Adresowa.txt",ios::in);
+    string linia;
+    int nr_linii=1;
+    while(getline(ksiazkaAdresowa,linia)) {
+        dlugoscLinii=linia.length();
+
+        switch(nr_linii) {
+        case 1: {
+            for(int i=0; i<dlugoscLinii; i++) {
+                if(linia[i]=='|') {
+                    if(iloscZnakow==0) {
+                        identyfikator=linia.substr(0,i);
+                        id = atoi(identyfikator.c_str());
+                        p=i+1;
+                    } else if(iloscZnakow==1)
+                    {
+                        identyfikatorUzytkownika=linia.substr(p,p-i);
+                        ident = atoi(identyfikatorUzytkownika.c_str());
+                        p=i;
+                    }
+                    else if(iloscZnakow==2) {
+                        imie=linia.substr(p+1,i-p-1);
+                        p=i;
+                    } else if(iloscZnakow==3) {
+                        nazwisko=linia.substr(p+1,i-p-1);
+                        p=i;
+                    } else if(iloscZnakow==4) {
+                        adres=linia.substr(p+1,i-p-1);
+                        p=i;
+                    } else if(iloscZnakow==5) {
+                        adresEmail=linia.substr(p+1,i-p-1);
+                        p=i;
+                    } else if(iloscZnakow==6) {
+                        numerTelefonu=linia.substr(p+1,i-p-1);
+                    }
+                    iloscZnakow=iloscZnakow+1;
+                }
+            }
+            fstream ksiazka;
+            ksiazka.open("Adresaci.txt",ios::out | ios::app);
+            if(ksiazka.good()) {
+            if(id!=idAdresata&&ident!=idUzytkownika){
+            ksiazka<<id<<"|";
+            ksiazka<<ident<<"|";
+            ksiazka<<imie<<"|";
+            ksiazka<<nazwisko<<"|";
+            ksiazka<<adres<<"|";
+            ksiazka<<adresEmail<<"|";
+            ksiazka<<numerTelefonu<<"|"<<endl;
+            //cout<<endl;
+            }
+            if(id==idAdresata&&ident==idUzytkownika)
+            {
+                for(int i=0;i<adresaci.size();i++)
+                {
+                    ksiazka<<adresaci[i].id<<"|";
+                    ksiazka<<adresaci[i].idUzytkownika<<"|";
+                    ksiazka<<adresaci[i].imie<<"|";
+                    ksiazka<<adresaci[i].nazwisko<<"|";
+                    ksiazka<<adresaci[i].adres<<"|";
+                    ksiazka<<adresaci[i].adresEmail<<"|";
+                    ksiazka<<adresaci[i].numerTelefonu<<"|"<<endl;
+                }
+            }
+            ksiazka.close();
+
+            Sleep(1000);
+            break;
+            }
+            else break;
+        }
+        }
+        if(nr_linii==1) {
+            if(ident==idUzytkownika){
+            nr_linii=0;
+            iloscZnakow=0;
+            idWprowadzanegoPrzyjaciela=idWprowadzanegoPrzyjaciela+1;
+                }
+                else{
+                    nr_linii=0;
+                    iloscZnakow=0;
+                }
+        }
+        nr_linii++;
+    }
+    ksiazkaAdresowa.close();
+
+    getchar();
+}
+
+int sprawdzPozycje(std::vector <Adresat> &adresaci, int idAdresata, int idUzytkownika)
+{
+    int pozycja =0;
+    for(int i=0;i<adresaci.size();i++)
+    {
+        if(idAdresata!=adresaci[i].id)
+        {
+            pozycja=pozycja+1;
+        }
+    }
+    return pozycja;
+}
 
 
 int main() {
@@ -586,33 +712,37 @@ int main() {
         }
         else if(wybor=='2')
         {
-            std::vector <Adresat> adresaci;
-            int idWprowadzanegoPrzyjaciela;
-            int ID;
-            if(adresaci.size()==0) {
-            idWprowadzanegoPrzyjaciela=adresaci.size();
-            } else {
-            ID=WyszukanieOstatniegoID(adresaci);
-            idWprowadzanegoPrzyjaciela=ID;
-            }
-            iloscPrzyjaciol=adresaci.size();
             cout<<"Podaj login: "<<endl;
             cin>>login;
             cout<<"Podaj haslo: "<<endl;
             cin>>haslo;
             int idUzytkownika=SprawdzLogowanie(uzytkownicy,login,haslo);
-            WczytajKsiazkeAdresowa(adresaci,idUzytkownika);
+            //WczytajKsiazkeAdresowa(adresaci,idUzytkownika);
             if(idUzytkownika!=0)
             {
+                    std::vector <Adresat> adresaci;
+                    WczytajKsiazkeAdresowa(adresaci,idUzytkownika);
+                    int idWprowadzanegoPrzyjaciela=0;
+                    /*int ID;
+                    if(adresaci.size()==0) {
+                        idWprowadzanegoPrzyjaciela=adresaci.size();
+                    } else {
+                        ID=WyszukanieOstatniegoID(adresaci);
+                        idWprowadzanegoPrzyjaciela=ID;
+                    }*/
+                        cout<<"wielkosc "<<adresaci.size()<<endl;
                 while(idUzytkownika!=0){
                 cout<<"1. Dodaj adresata "<<endl;
-                cout<<"2. Wysztkaj po imieniu "<<endl;
+                cout<<"2. Wyszukaj po imieniu "<<endl;
                 cout<<"3. Wyszukaj po nazwisku "<<endl;
                 cout<<"4. Wyswietl wszystkich adresatow "<<endl;
                 cout<<"5. Usun adresata "<<endl;
+                cout<<"6. Edycja imienia "<<endl;
                 cout<<"9. Wyloguj sie "<<endl;
                 cin>>wybor;
                 cout<<"ID uzytkownika: "<<idUzytkownika<<endl;
+                cout<<"ile osob: "<<adresaci.size()<<endl;
+
                 if(wybor=='1'){
                 int naj=NajwiekszeIDAdresata();
                 cout<<naj<<endl;
@@ -626,12 +756,13 @@ int main() {
                     cin>>imie;
                     WyszukanieOsobyPoImieniu(adresaci,imie,iloscPrzyjaciol,idUzytkownika);
 
+
                 }
                 else if(wybor=='3'){
                     iloscPrzyjaciol=adresaci.size();
                     cout<<"Podaj nazwisko: "<<endl;
                     cin>>nazwisko;
-                    WyszukanieOsobyPoImieniu(adresaci,nazwisko,iloscPrzyjaciol,idUzytkownika);
+                    WyszukanieOsobyPoNazwisku(adresaci,nazwisko,iloscPrzyjaciol,idUzytkownika);
                 }
                 else if (wybor=='4')
                 {
@@ -650,8 +781,28 @@ int main() {
                     fstream f_conf( "Adresaci.txt", ios::in ); //resetowanie pliku o danej nazwie
                     reset(f_conf);
                     usuwanieOsobyZeStruktury(adresaci,id);
+                    cout<<"Uzytkownik usuniety! "<<endl;
                     }
                     else cout<<"nie ma takiego id!"<<endl;
+                }
+                else if (wybor=='6')
+                {
+                    iloscPrzyjaciol=adresaci.size();
+                    //cout<<"ile osob: "<<adresaci.size()<<endl;
+                    cout<<"Podaj id adresata do zmiany"<<endl;
+                    cin>>id;
+                    if(czyIstniejeTakieID(adresaci,id)==1){
+                    sprawdzPozycje(adresaci,id,idUzytkownika);
+                    cout<<"Podaj nowe imie: "<<endl;
+                    cin>>imie;
+                    edycjaImienia(adresaci,id,idUzytkownika,imie);
+                    zapisEdycji(adresaci,id,idUzytkownika);
+                    ZamianaPlikow();
+                    fstream f_conf( "Adresaci.txt", ios::in ); //resetowanie pliku o danej nazwie
+                    reset(f_conf);
+                    }
+                    else cout<<"nie ma takiego id!"<<endl;
+
                 }
                 else if(wybor=='9')
                 {
