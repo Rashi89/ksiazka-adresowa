@@ -68,7 +68,6 @@ int DodanieOsobyDoKsiazkiAdresowej(std:: vector <Adresat> &adresaci,int iloscPrz
         ksiazkaAdresowa<<adresaci[iloscPrzyjaciol].adresEmail<<"|";
         ksiazkaAdresowa<<adresaci[iloscPrzyjaciol].numerTelefonu<<"|"<<endl;
         cout<<endl;
-
         ksiazkaAdresowa.close();
         cout<<"Przyjaciel dodany!"<<endl;
         Sleep(1000);
@@ -93,13 +92,13 @@ void WczytajKsiazkeAdresowa(std:: vector <Adresat> &adresaci,int idUzytkownika) 
     int iloscZnakow=0;
     int p=0;
     int k=0;
+
     fstream ksiazkaAdresowa;
     ksiazkaAdresowa.open("Ksiazka_Adresowa.txt",ios::in);
     string linia;
     int nr_linii=1;
     while(getline(ksiazkaAdresowa,linia)) {
         dlugoscLinii=linia.length();
-
         switch(nr_linii) {
         case 1: {
             for(int i=0; i<dlugoscLinii; i++) {
@@ -171,7 +170,6 @@ void WyswietlanieOsobZKsiazkiAdresowej(std:: vector <Adresat> &adresaci, int ilo
             cout<< "Numer telefonu: " << adresaci[i].numerTelefonu<<endl;
         }
     }
-
     system("pause");
 }
 void WyszukanieOsobyPoImieniu(std::vector <Adresat> &adresaci,string imie,int iloscPrzyjaciol,int idUzytkownika) {
@@ -292,7 +290,6 @@ void WczytajUzytkownikow(std::vector <Uzytkownik> &uzytkownicy) {
     int nr_linii=1;
     while(getline(KsiazkaUzytkownikow,linia)) {
         dlugoscLinii=linia.length();
-
         switch(nr_linii) {
         case 1: {
             for(int i=0; i<dlugoscLinii; i++) {
@@ -359,7 +356,6 @@ int DodanieUzytkownika(std:: vector <Uzytkownik> &uzytkownicy,int iloscUzytkowni
         KsiazkaUzytkownikow<<uzytkownicy[iloscUzytkownikow].login<<"|";
         KsiazkaUzytkownikow<<uzytkownicy[iloscUzytkownikow].haslo<<"|"<<endl;
         cout<<endl;
-
         KsiazkaUzytkownikow.close();
         cout<<"Uzytkownik dodany!"<<endl;
         Sleep(1000);
@@ -389,9 +385,11 @@ int SprawdzLogowanie(std:: vector <Uzytkownik> &uzytkownicy, string login, strin
     }
     if(p==k) {
         cout<<"Logowanie udane!"<<endl;
+            Sleep(1000);
         return uzytkownicy[p].idUzytkownika;
     } else {
         cout<<"Logowanie nie udane!"<<endl;
+            Sleep(1000);
         return 0;
     }
 
@@ -419,7 +417,6 @@ void zapis(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
     int nr_linii=1;
     while(getline(ksiazkaAdresowa,linia)) {
         dlugoscLinii=linia.length();
-
         switch(nr_linii) {
         case 1: {
             for(int i=0; i<dlugoscLinii; i++) {
@@ -461,8 +458,6 @@ void zapis(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
                     ksiazka<<adres<<"|";
                     ksiazka<<adresEmail<<"|";
                     ksiazka<<numerTelefonu<<"|"<<endl;
-                    //cout<<endl;
-
                     ksiazka.close();
                 }
                 break;
@@ -483,8 +478,6 @@ void zapis(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
         nr_linii++;
     }
     ksiazkaAdresowa.close();
-
-    //getchar();
 }
 
 void ZamianaPlikow() {
@@ -503,11 +496,9 @@ void ZamianaPlikow() {
 
                         ksiazkaAdresowa<<linia<<endl;
                     }
-
                     break;
                 }
                 }
-
                 if(nr_linii==1) {
                     nr_linii=0;
                 }
@@ -535,7 +526,6 @@ void edycjaImienia(std::vector <Adresat> &adresaci,int id, int idUzytkownika, st
             adresaci[i].imie=noweImie;
         }
     }
-    Sleep(1000);
 }
 void edycjaNazwiska(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string noweNazwisko) {
     for(int i=0; i<adresaci.size(); i++) {
@@ -543,7 +533,6 @@ void edycjaNazwiska(std::vector <Adresat> &adresaci,int id, int idUzytkownika, s
             adresaci[i].nazwisko=noweNazwisko;
         }
     }
-    Sleep(1000);
 }
 
 void edycjaAdresu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyAdres) {
@@ -552,7 +541,6 @@ void edycjaAdresu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, str
             adresaci[i].adres=nowyAdres;
         }
     }
-    Sleep(1000);
 }
 
 void edycjaAdresuEmail(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyAdresEmail) {
@@ -561,7 +549,6 @@ void edycjaAdresuEmail(std::vector <Adresat> &adresaci,int id, int idUzytkownika
             adresaci[i].adresEmail=nowyAdresEmail;
         }
     }
-    Sleep(1000);
 }
 
 void edycjaTelefonu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyTelefon) {
@@ -570,7 +557,6 @@ void edycjaTelefonu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, s
             adresaci[i].numerTelefonu=nowyTelefon;
         }
     }
-    Sleep(1000);
 }
 
 void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
@@ -594,7 +580,6 @@ void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownik
     int nr_linii=1;
     while(getline(ksiazkaAdresowa,linia)) {
         dlugoscLinii=linia.length();
-
         switch(nr_linii) {
         case 1: {
             for(int i=0; i<dlugoscLinii; i++) {
@@ -636,7 +621,6 @@ void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownik
                     ksiazka<<adres<<"|";
                     ksiazka<<adresEmail<<"|";
                     ksiazka<<numerTelefonu<<"|"<<endl;
-                    //cout<<endl;
                 }
                 if(id==idAdresata&&ident==idUzytkownika) {
                     for(int i=0; i<adresaci.size(); i++) {
@@ -650,7 +634,6 @@ void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownik
                     }
                 }
                 ksiazka.close();
-
                 Sleep(1000);
                 break;
             } else
@@ -691,7 +674,6 @@ void EdycjaIZamianaPlikow(std::vector <Adresat> &adresaci,int id, int idUzytkown
     cout<<"Zmiany zapisane!"<<endl;
 }
 
-
 void zapisHasla(std::vector<Uzytkownik> &uzytkownicy) {
     ofstream KsiazkaUzytkownikow("Uzytkownicy.txt",ios::out|ios::trunc);
     for (short j = 0; j < uzytkownicy.size(); j++) {
@@ -714,8 +696,6 @@ int main() {
 
     std::vector <Uzytkownik> uzytkownicy;
     WczytajUzytkownikow(uzytkownicy);
-    //WczytajKsiazkeAdresowa(adresaci);
-
     int iloscPrzyjaciol=0;
     int iloscUzytkownikow=0;
     int id;
@@ -736,19 +716,10 @@ int main() {
             cout<<"Podaj haslo: "<<endl;
             cin>>haslo;
             int idUzytkownika=SprawdzLogowanie(uzytkownicy,login,haslo);
-            //WczytajKsiazkeAdresowa(adresaci,idUzytkownika);
             if(idUzytkownika!=0) {
                 std::vector <Adresat> adresaci;
                 WczytajKsiazkeAdresowa(adresaci,idUzytkownika);
                 int idWprowadzanegoPrzyjaciela=0;
-                /*int ID;
-                if(adresaci.size()==0) {
-                    idWprowadzanegoPrzyjaciela=adresaci.size();
-                } else {
-                    ID=WyszukanieOstatniegoID(adresaci);
-                    idWprowadzanegoPrzyjaciela=ID;
-                }
-                cout<<"wielkosc "<<adresaci.size()<<endl;*/
                 while(idUzytkownika!=0) {
                         system("cls");
                     cout<<"1. Dodaj adresata "<<endl;
@@ -760,20 +731,15 @@ int main() {
                     cout<<"7. Zmiana hasla "<<endl;
                     cout<<"9. Wyloguj sie "<<endl;
                     cin>>wybor;
-                    //cout<<"ID uzytkownika: "<<idUzytkownika<<endl;
-                    //cout<<"ile osob: "<<adresaci.size()<<endl;
                     if(wybor=='1') {
+                             WczytajKsiazkeAdresowa(adresaci,idUzytkownika);
                         int naj=NajwiekszeIDAdresata();
-                        //cout<<naj<<endl;
                         iloscPrzyjaciol=DodanieOsobyDoKsiazkiAdresowej(adresaci,iloscPrzyjaciol,idUzytkownika, naj);
-                        //cout<<"Ilosc przyjaciol uzytkownika "<<adresaci.size()<<endl;
                     } else if(wybor=='2') {
                         iloscPrzyjaciol=adresaci.size();
                         cout<<"Podaj imie: "<<endl;
                         cin>>imie;
                         WyszukanieOsobyPoImieniu(adresaci,imie,iloscPrzyjaciol,idUzytkownika);
-
-
                     } else if(wybor=='3') {
                         iloscPrzyjaciol=adresaci.size();
                         cout<<"Podaj nazwisko: "<<endl;
@@ -782,22 +748,31 @@ int main() {
                     } else if (wybor=='4') {
                         iloscPrzyjaciol=adresaci.size();
                         WyswietlanieOsobZKsiazkiAdresowej(adresaci,iloscPrzyjaciol,idUzytkownika);
-
                     } else if (wybor=='5') {
                         iloscPrzyjaciol=adresaci.size();
                         cout<<"Podaj id osoby do usuniecia: "<<endl;
                         cin>>id;
-                        if(czyIstniejeTakieID(adresaci,id)==1) {
+                        cout<<"Czy jestes pewny? <t/n>"<<endl;
+                        cin>>wybor;
+                        if(wybor=='t'){
+                            if(czyIstniejeTakieID(adresaci,id)==1) {
                             zapis(adresaci,id,idUzytkownika);
                             ZamianaPlikow();
                             std::remove("Adresaci.txt");
                             usuwanieOsobyZeStruktury(adresaci,id);
                             cout<<"Uzytkownik usuniety! "<<endl;
+                            Sleep(1000);
                         } else
                             cout<<"nie ma takiego id!"<<endl;
+                            Sleep(1000);
+                        }
+                        else if(wybor=='n')
+                        {
+                            ;
+                        }
+
                     } else if (wybor=='6') {
                         iloscPrzyjaciol=adresaci.size();
-                        //cout<<"ile osob: "<<adresaci.size()<<endl;
                         cout<<"Podaj id adresata do zmiany"<<endl;
                         cin>>id;
                         if(czyIstniejeTakieID(adresaci,id)==1) {
@@ -824,13 +799,11 @@ int main() {
                                 getline(cin, adres);
                                 edycjaAdresu(adresaci,id,idUzytkownika,adres);
                                 EdycjaIZamianaPlikow(adresaci,id,idUzytkownika);
-
                             } else if(wybor=='4') {
                                 cout<<"Podaj nowy adres email: ";
                                 cin>>email;
                                 edycjaAdresuEmail(adresaci,id,idUzytkownika,email);
                                 EdycjaIZamianaPlikow(adresaci,id,idUzytkownika);
-
                             } else if(wybor=='5') {
                                 cout<< "Podaj nowy nr telefonu: ";
                                 cin.sync();
@@ -840,14 +813,13 @@ int main() {
                             }
                         } else
                             cout<<"nie ma takiego id!"<<endl;
+                            Sleep(1000);
 
                     } else if(wybor=='7') {
                         cout<<"Podaj nowe haslo: "<<endl;
                         cin>>haslo;
                         edycjaHasla(uzytkownicy,idUzytkownika,haslo);
                         zapisHasla(uzytkownicy);
-                        cout<<"Ilosc uzytkownikow: "<<uzytkownicy.size()<<endl;
-
                     } else if(wybor=='9') {
                         idUzytkownika=0;
                     }
