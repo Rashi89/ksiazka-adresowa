@@ -23,7 +23,7 @@ struct Uzytkownik {
     string haslo;
 };
 
-int DodanieOsobyDoKsiazkiAdresowej(std:: vector <Adresat> &adresaci,int iloscPrzyjaciol,int idUzytkownika,int NajwiekszeID) {
+int DodanieOsobyDoKsiazkiAdresowej(vector <Adresat> &adresaci,int iloscPrzyjaciol,int idUzytkownika,int NajwiekszeID) {
     int id;
     string imie;
     string nazwisko;
@@ -79,7 +79,7 @@ int DodanieOsobyDoKsiazkiAdresowej(std:: vector <Adresat> &adresaci,int iloscPrz
     return iloscPrzyjaciol;
 }
 
-void WczytajKsiazkeAdresowa(std:: vector <Adresat> &adresaci,int idUzytkownika) {
+void WczytajKsiazkeAdresowa(vector <Adresat> &adresaci,int idUzytkownika) {
     int idWprowadzanegoPrzyjaciela=0;
     string identyfikator,identyfikatorUzytkownika;
     int id,ident;
@@ -140,8 +140,7 @@ void WczytajKsiazkeAdresowa(std:: vector <Adresat> &adresaci,int idUzytkownika) 
                 adresaci[idWprowadzanegoPrzyjaciela].numerTelefonu=numerTelefonu;
                 Sleep(1000);
                 break;
-            } else
-                break;
+            }
         }
         }
         if(nr_linii==1) {
@@ -158,7 +157,7 @@ void WczytajKsiazkeAdresowa(std:: vector <Adresat> &adresaci,int idUzytkownika) 
     }
     ksiazkaAdresowa.close();
 }
-void WyswietlanieOsobZKsiazkiAdresowej(std:: vector <Adresat> &adresaci, int iloscPrzyjaciol, int idUzytkownika) {
+void WyswietlanieOsobZKsiazkiAdresowej(vector <Adresat> &adresaci, int iloscPrzyjaciol, int idUzytkownika) {
     for(int i=0; i<iloscPrzyjaciol; i++) {
         if(adresaci[i].idUzytkownika==idUzytkownika) {
             cout<<endl;
@@ -172,7 +171,7 @@ void WyswietlanieOsobZKsiazkiAdresowej(std:: vector <Adresat> &adresaci, int ilo
     }
     system("pause");
 }
-void WyszukanieOsobyPoImieniu(std::vector <Adresat> &adresaci,string imie,int iloscPrzyjaciol,int idUzytkownika) {
+void WyszukanieOsobyPoImieniu(vector <Adresat> &adresaci,string imie,int iloscPrzyjaciol,int idUzytkownika) {
     int k=0;
     for(int i=0; i<iloscPrzyjaciol; i++) {
         if(adresaci[i].imie ==imie) {
@@ -191,7 +190,7 @@ void WyszukanieOsobyPoImieniu(std::vector <Adresat> &adresaci,string imie,int il
     }
     system("pause");
 }
-void WyszukanieOsobyPoNazwisku(std::vector <Adresat> &adresaci,string nazwisko,int iloscPrzyjaciol,int idUzytkownika) {
+void WyszukanieOsobyPoNazwisku(vector <Adresat> &adresaci,string nazwisko,int iloscPrzyjaciol,int idUzytkownika) {
     int k=0;
     for(int i=0; i<iloscPrzyjaciol; i++) {
         if(adresaci[i].nazwisko ==nazwisko) {
@@ -211,14 +210,14 @@ void WyszukanieOsobyPoNazwisku(std::vector <Adresat> &adresaci,string nazwisko,i
     system("pause");
 }
 
-int WyszukanieOstatniegoID(std::vector<Adresat> &adresaci) {
+int WyszukanieOstatniegoID(vector<Adresat> &adresaci) {
     int identyfikator;
     int rozmiar=adresaci.size();
     identyfikator=adresaci[rozmiar-1].id;
     return identyfikator;
 }
 
-bool czyIstniejeTakieID(std::vector <Adresat> &adresaci,int id) {
+bool czyIstniejeTakieID(vector <Adresat> &adresaci,int id) {
     int pozycja=0;
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id) {
@@ -273,8 +272,7 @@ int NajwiekszeIDAdresata() {
     return id1+1;
 }
 
-
-void WczytajUzytkownikow(std::vector <Uzytkownik> &uzytkownicy) {
+void WczytajUzytkownikow(vector <Uzytkownik> &uzytkownicy) {
     int idWprowadzanegoUzytkownika=0;
     string identyfikator;
     int id;
@@ -326,8 +324,7 @@ void WczytajUzytkownikow(std::vector <Uzytkownik> &uzytkownicy) {
     KsiazkaUzytkownikow.close();
 }
 
-
-int DodanieUzytkownika(std:: vector <Uzytkownik> &uzytkownicy,int iloscUzytkownikow) {
+int DodanieUzytkownika( vector <Uzytkownik> &uzytkownicy,int iloscUzytkownikow) {
     int idUzytkownika;
     string login;
     string haslo;
@@ -367,8 +364,7 @@ int DodanieUzytkownika(std:: vector <Uzytkownik> &uzytkownicy,int iloscUzytkowni
     return iloscUzytkownikow;
 }
 
-
-int SprawdzLogowanie(std:: vector <Uzytkownik> &uzytkownicy, string login, string haslo) {
+int SprawdzLogowanie( vector <Uzytkownik> &uzytkownicy, string login, string haslo) {
     int dlugosc=uzytkownicy.size();
     int p=0,k=1;
     for(int i=0; i<dlugosc; i++) {
@@ -395,8 +391,7 @@ int SprawdzLogowanie(std:: vector <Uzytkownik> &uzytkownicy, string login, strin
 
 }
 
-
-void zapis(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
+void zapis(vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
 
     int idWprowadzanegoPrzyjaciela=0;
     string identyfikator,identyfikatorUzytkownika;
@@ -493,7 +488,6 @@ void ZamianaPlikow() {
                 switch(nr_linii) {
                 case 1: {
                     if(ksiazkaAdresowa.good()) {
-
                         ksiazkaAdresowa<<linia<<endl;
                     }
                     break;
@@ -509,7 +503,7 @@ void ZamianaPlikow() {
     }
 }
 
-void usuwanieOsobyZeStruktury(std::vector<Adresat> &adresaci, int id) {
+void usuwanieOsobyZeStruktury(vector<Adresat> &adresaci, int id) {
     int pozycja=0;
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id) {
@@ -520,14 +514,14 @@ void usuwanieOsobyZeStruktury(std::vector<Adresat> &adresaci, int id) {
     adresaci.erase(adresaci.begin()+pozycja);
 }
 
-void edycjaImienia(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string noweImie) {
+void edycjaImienia(vector <Adresat> &adresaci,int id, int idUzytkownika, string noweImie) {
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
             adresaci[i].imie=noweImie;
         }
     }
 }
-void edycjaNazwiska(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string noweNazwisko) {
+void edycjaNazwiska(vector <Adresat> &adresaci,int id, int idUzytkownika, string noweNazwisko) {
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
             adresaci[i].nazwisko=noweNazwisko;
@@ -535,7 +529,7 @@ void edycjaNazwiska(std::vector <Adresat> &adresaci,int id, int idUzytkownika, s
     }
 }
 
-void edycjaAdresu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyAdres) {
+void edycjaAdresu(vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyAdres) {
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
             adresaci[i].adres=nowyAdres;
@@ -543,7 +537,7 @@ void edycjaAdresu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, str
     }
 }
 
-void edycjaAdresuEmail(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyAdresEmail) {
+void edycjaAdresuEmail(vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyAdresEmail) {
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
             adresaci[i].adresEmail=nowyAdresEmail;
@@ -551,7 +545,7 @@ void edycjaAdresuEmail(std::vector <Adresat> &adresaci,int id, int idUzytkownika
     }
 }
 
-void edycjaTelefonu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyTelefon) {
+void edycjaTelefonu(vector <Adresat> &adresaci,int id, int idUzytkownika, string nowyTelefon) {
     for(int i=0; i<adresaci.size(); i++) {
         if(adresaci[i].id==id&&adresaci[i].idUzytkownika==idUzytkownika) {
             adresaci[i].numerTelefonu=nowyTelefon;
@@ -559,7 +553,18 @@ void edycjaTelefonu(std::vector <Adresat> &adresaci,int id, int idUzytkownika, s
     }
 }
 
-void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
+int sprawdzPozycje(vector <Adresat> &adresaci, int idAdresata, int idUzytkownika) {
+    int pozycja =0;
+    for(int i=0; i<adresaci.size(); i++) {
+        if(idAdresata!=adresaci[i].id) {
+            pozycja=pozycja+1;
+        }
+        else break;
+    }
+    return pozycja;
+}
+
+void zapisEdycji(vector<Adresat> &adresaci, int idAdresata,int idUzytkownika) {
 
     int idWprowadzanegoPrzyjaciela=0;
     string identyfikator,identyfikatorUzytkownika;
@@ -613,7 +618,7 @@ void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownik
             fstream ksiazka;
             ksiazka.open("Adresaci.txt",ios::out | ios::app);
             if(ksiazka.good()) {
-                if(id!=idAdresata&&ident!=idUzytkownika) {
+                if(id!=idAdresata) {
                     ksiazka<<id<<"|";
                     ksiazka<<ident<<"|";
                     ksiazka<<imie<<"|";
@@ -622,8 +627,8 @@ void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownik
                     ksiazka<<adresEmail<<"|";
                     ksiazka<<numerTelefonu<<"|"<<endl;
                 }
-                if(id==idAdresata&&ident==idUzytkownika) {
-                    for(int i=0; i<adresaci.size(); i++) {
+                if(id==idAdresata) {
+                        int i=sprawdzPozycje(adresaci,idAdresata,idUzytkownika);
                         ksiazka<<adresaci[i].id<<"|";
                         ksiazka<<adresaci[i].idUzytkownika<<"|";
                         ksiazka<<adresaci[i].imie<<"|";
@@ -631,7 +636,6 @@ void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownik
                         ksiazka<<adresaci[i].adres<<"|";
                         ksiazka<<adresaci[i].adresEmail<<"|";
                         ksiazka<<adresaci[i].numerTelefonu<<"|"<<endl;
-                    }
                 }
                 ksiazka.close();
                 Sleep(1000);
@@ -655,26 +659,16 @@ void zapisEdycji(std::vector<Adresat> &adresaci, int idAdresata,int idUzytkownik
     ksiazkaAdresowa.close();
 }
 
-int sprawdzPozycje(std::vector <Adresat> &adresaci, int idAdresata, int idUzytkownika) {
-    int pozycja =0;
-    for(int i=0; i<adresaci.size(); i++) {
-        if(idAdresata!=adresaci[i].id) {
-            pozycja=pozycja+1;
-        }
-    }
-    return pozycja;
-}
-
-void EdycjaIZamianaPlikow(std::vector <Adresat> &adresaci,int id, int idUzytkownika) {
+void EdycjaIZamianaPlikow(vector <Adresat> &adresaci,int id, int idUzytkownika) {
     zapisEdycji(adresaci,id,idUzytkownika);
     ZamianaPlikow();
     //fstream f_conf( "Adresaci.txt", ios::in ); //resetowanie pliku o danej nazwie
     //reset(f_conf);
-    std::remove("Adresaci.txt");
+    remove("Adresaci.txt");
     cout<<"Zmiany zapisane!"<<endl;
 }
 
-void zapisHasla(std::vector<Uzytkownik> &uzytkownicy) {
+void zapisHasla(vector<Uzytkownik> &uzytkownicy) {
     ofstream KsiazkaUzytkownikow("Uzytkownicy.txt",ios::out|ios::trunc);
     for (short j = 0; j < uzytkownicy.size(); j++) {
         KsiazkaUzytkownikow<<uzytkownicy[j].idUzytkownika<<"|";
@@ -683,7 +677,7 @@ void zapisHasla(std::vector<Uzytkownik> &uzytkownicy) {
     }
 }
 
-void edycjaHasla(std::vector <Uzytkownik> &uzytkownicy,int idUzytkownika,string noweHaslo) {
+void edycjaHasla(vector <Uzytkownik> &uzytkownicy,int idUzytkownika,string noweHaslo) {
     for(int i=0; i<uzytkownicy.size(); i++) {
         if(uzytkownicy[i].idUzytkownika==idUzytkownika) {
             uzytkownicy[i].haslo=noweHaslo;
@@ -694,7 +688,7 @@ void edycjaHasla(std::vector <Uzytkownik> &uzytkownicy,int idUzytkownika,string 
 
 int main() {
 
-    std::vector <Uzytkownik> uzytkownicy;
+    vector <Uzytkownik> uzytkownicy;
     WczytajUzytkownikow(uzytkownicy);
     int iloscPrzyjaciol=0;
     int iloscUzytkownikow=0;
@@ -717,11 +711,11 @@ int main() {
             cin>>haslo;
             int idUzytkownika=SprawdzLogowanie(uzytkownicy,login,haslo);
             if(idUzytkownika!=0) {
-                std::vector <Adresat> adresaci;
+                vector <Adresat> adresaci;
                 WczytajKsiazkeAdresowa(adresaci,idUzytkownika);
                 int idWprowadzanegoPrzyjaciela=0;
                 while(idUzytkownika!=0) {
-                        system("cls");
+                    system("cls");
                     cout<<"1. Dodaj adresata "<<endl;
                     cout<<"2. Wyszukaj po imieniu "<<endl;
                     cout<<"3. Wyszukaj po nazwisku "<<endl;
@@ -732,8 +726,8 @@ int main() {
                     cout<<"9. Wyloguj sie "<<endl;
                     cin>>wybor;
                     if(wybor=='1') {
-                             WczytajKsiazkeAdresowa(adresaci,idUzytkownika);
                         int naj=NajwiekszeIDAdresata();
+                        iloscPrzyjaciol=adresaci.size();
                         iloscPrzyjaciol=DodanieOsobyDoKsiazkiAdresowej(adresaci,iloscPrzyjaciol,idUzytkownika, naj);
                     } else if(wybor=='2') {
                         iloscPrzyjaciol=adresaci.size();
@@ -758,7 +752,7 @@ int main() {
                             if(czyIstniejeTakieID(adresaci,id)==1) {
                             zapis(adresaci,id,idUzytkownika);
                             ZamianaPlikow();
-                            std::remove("Adresaci.txt");
+                            remove("Adresaci.txt");
                             usuwanieOsobyZeStruktury(adresaci,id);
                             cout<<"Uzytkownik usuniety! "<<endl;
                             Sleep(1000);
@@ -770,13 +764,10 @@ int main() {
                         {
                             ;
                         }
-
                     } else if (wybor=='6') {
-                        iloscPrzyjaciol=adresaci.size();
                         cout<<"Podaj id adresata do zmiany"<<endl;
                         cin>>id;
                         if(czyIstniejeTakieID(adresaci,id)==1) {
-                            sprawdzPozycje(adresaci,id,idUzytkownika);
                             cout<<"1. Imie "<<endl;
                             cout<<"2. Nazwisko "<<endl;
                             cout<<"3. Adres "<<endl;
@@ -814,7 +805,6 @@ int main() {
                         } else
                             cout<<"nie ma takiego id!"<<endl;
                             Sleep(1000);
-
                     } else if(wybor=='7') {
                         cout<<"Podaj nowe haslo: "<<endl;
                         cin>>haslo;
